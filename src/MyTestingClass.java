@@ -1,16 +1,10 @@
-class MyTestingClass {
-    private int key;
-
-    public MyTestingClass(int key) {
-        this.key = key;
+class MyTestingClass{
+    private int val;
+    public MyTestingClass(int val) {
+        this.val = val;
     }
-
-    public int getKey() {
-        return key;
-    }
-
     @Override
     public int hashCode() {
-        return key;
+        return Integer.hashCode(val);
     }
 }

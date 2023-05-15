@@ -3,21 +3,21 @@ public class MyHashTable <K, V>{
     private int M = 11; // default number of chains
     private int size;
 
-    public MyHashTable() {
-        chain = new HashNode[M];
+    public MyHashTable() {//constructor
+        this.chain = new HashNode[M];
     }
 
-    public MyHashTable(int M) {
+    public MyHashTable(int M) {//constructor
         this.M = M;
-        chain = new HashNode[M];
+        this.chain = new HashNode[M];
     }
 
     private int hash(K key) {
-        return key.hashCode() % M;
+        return key.hashCode() % M; // hashing
     }
 
     public void put(K key, V value) {
-        int index = hash(key);
+        int index = hash(key); // getting index with hashing
         HashNode<K, V> newNode = new HashNode<>(key, value);
 
         for (HashNode<K, V> currentNode = chain[index]; currentNode != null; currentNode = currentNode.next) {
@@ -67,22 +67,25 @@ public class MyHashTable <K, V>{
         for (HashNode<K, V> node : chain) {
             for (HashNode<K, V> currentNode = node; currentNode != null; currentNode = currentNode.next) {
                 if (currentNode.value.equals(value)) {
-                    return true;
+                    return true; // returning true if value is in hash table
                 }
             }
         }
-        return false;
+        return false; // returning false otherwise
     }
 
     public K getKey(V value) {
         for (HashNode<K, V> node : chain) {
             for (HashNode<K, V> currentNode = node; currentNode != null; currentNode = currentNode.next) {
                 if (currentNode.value.equals(value)) {
-                    return currentNode.key;
+                    return currentNode.key; // returning key of value if exist
                 }
             }
         }
-        return null;
+        return null;  // returning null otherwise
     }
 
+    public int getSize() {
+        return size;
+    }
 }

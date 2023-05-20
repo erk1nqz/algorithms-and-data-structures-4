@@ -1,4 +1,17 @@
 public class MyHashTable <K, V>{
+    private class HashNode<K,V>{
+        private K key;
+        private V value;
+        private HashNode<K,V> next;
+        public HashNode(K key, V value){
+            this.key = key;
+            this.value = value;
+        }
+        @Override
+        public String toString(){
+            return "{" + key + ":" + value + "}";
+        }
+    }
     private HashNode<K, V>[] chain;
     private int M = 11; // default number of chains
     private int size;
@@ -87,5 +100,18 @@ public class MyHashTable <K, V>{
 
     public int getSize() {
         return size;
+    }
+
+    public V remove_old(K key,V newval) {
+        int index = hash(key);
+        HashNode<K, V> node = chain[index];
+        while(node != null){
+            if(node.key.equals(key)){
+                node.value = newval;
+                return newval;
+            }
+            node = node.next;
+        }
+        return null;
     }
 }
